@@ -53,13 +53,6 @@ $(document).ready(function () {
     }
 
 
-    $(".square").hover(function () {
-        $(this).css("background-color", "yellow")
-    }, function () {
-        $(this).css("background-color", SQUARE_DEFAULT_COLOR)
-    })
-
-
     async function play() {
         GAME_START_SOUND.play()
         SCORE.css("color", "black")
@@ -86,6 +79,7 @@ $(document).ready(function () {
             console.log(waitTime)
             hovered = true;
             POINT_SOUND.play()
+            $("#" + randomPositionX + "-" + randomPositionY).css("transform", "scale(3)")
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
         }
 
@@ -113,6 +107,7 @@ $(document).ready(function () {
 
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
             $("#" + randomPositionX + "-" + randomPositionY).css("background-color", SQUARE_DEFAULT_COLOR)
+            $("#" + randomPositionX + "-" + randomPositionY).css("transform", "scale(1)")
             hovered = false;
 
 
