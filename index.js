@@ -68,6 +68,7 @@ $(document).ready(function () {
 
 
             await timer(waitTime)
+            waitTime -= 10;
             if (!hovered) lostLive()
 
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
