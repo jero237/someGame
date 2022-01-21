@@ -79,7 +79,9 @@ $(document).ready(function () {
             console.log(waitTime)
             hovered = true;
             POINT_SOUND.play()
+            $("#" + randomPositionX + "-" + randomPositionY).css("background-color", "green")
             $("#" + randomPositionX + "-" + randomPositionY).css("transform", "scale(3)")
+            $("#" + randomPositionX + "-" + randomPositionY).css("z-index", "123")
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
         }
 
@@ -108,6 +110,7 @@ $(document).ready(function () {
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
             $("#" + randomPositionX + "-" + randomPositionY).css("background-color", SQUARE_DEFAULT_COLOR)
             $("#" + randomPositionX + "-" + randomPositionY).css("transform", "scale(1)")
+            $("#" + randomPositionX + "-" + randomPositionY).css("z-index", "0")
             hovered = false;
 
 
