@@ -25,6 +25,8 @@ $(document).ready(function () {
 
 
     async function play() {
+        SCORE.css("color", "black")
+        SCORE.text("0")
 
         if(isPlaying)return
 
@@ -78,7 +80,7 @@ $(document).ready(function () {
 
 
             if (lives == 0) {
-                SCORE.text("0")
+                SCORE.css("color", "red")
                 isPlaying = false;
                 return
             }
