@@ -2,12 +2,17 @@ const timer = ms => new Promise(res => setTimeout(res, ms))
 let isPlaying = false;
 
 
+
 $(document).ready(function () {
     const MAIN = $("#playArea")
     const SQUARE_DEFAULT_COLOR = "red";
     const SCORE = $("#score")
     const LIVES = [$("#live1"), $("#live2"), $("#live3")]
     const PLAY_BUTTON = $(".fa-play-circle")
+    const LOST_LIVE_SOUND = new Audio("Resources/lose.mp3")
+    const GAMEOVER_SOUND = new Audio("Resources/game-over.wav")
+    const POINT_SOUND = new Audio("Resources/point.mp3")
+    const GAME_START_SOUND = new Audio("Resources/game-start.wav")
 
 
     for (let i = 0; i < 20; i++) {
@@ -25,6 +30,7 @@ $(document).ready(function () {
 
 
     async function play() {
+        GAME_START_SOUND.play()
         SCORE.css("color", "black")
         SCORE.text("0")
 
@@ -49,6 +55,7 @@ $(document).ready(function () {
             SCORE.text(puntaje)
             console.log(waitTime)
             hovered = true;
+            POINT_SOUND.play()
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
         }
 
@@ -56,6 +63,7 @@ $(document).ready(function () {
             LIVES[lives - 1].removeClass("fas")
             LIVES[lives - 1].addClass("far")
             lives--;
+            LOST_LIVE_SOUND.play()
         }
 
         for (let i = 0; i < 1000; i++) {
@@ -82,6 +90,7 @@ $(document).ready(function () {
             if (lives == 0) {
                 SCORE.css("color", "red")
                 isPlaying = false;
+                GAMEOVER_SOUND.play()
                 return
             }
         }
