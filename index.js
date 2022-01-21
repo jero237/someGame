@@ -1,4 +1,5 @@
 const timer = ms => new Promise(res => setTimeout(res, ms))
+let isPlaying = false;
 
 
 $(document).ready(function () {
@@ -24,12 +25,16 @@ $(document).ready(function () {
 
 
     async function play() {
+
+        if(isPlaying)return
+
         let randomPositionX;
         let randomPositionY;
         let puntaje = 0;
         let waitTime = 1000;
         let hovered = false;
         let lives = 3;
+        isPlaying = true;
 
         for (let i = 0; i < 3; i++) {
             LIVES[i].removeClass("far")
@@ -61,7 +66,6 @@ $(document).ready(function () {
             $("#" + randomPositionX + "-" + randomPositionY).on("mouseenter", sumarPuntaje)
 
 
-            console.log(waitTime)
 
             await timer(waitTime)
             if (!hovered) lostLive()
@@ -70,8 +74,11 @@ $(document).ready(function () {
             $("#" + randomPositionX + "-" + randomPositionY).css("background-color", SQUARE_DEFAULT_COLOR)
             hovered = false;
 
+
+
             if (lives == 0) {
                 SCORE.text("0")
+                isPlaying = false;
                 return
             }
         }
