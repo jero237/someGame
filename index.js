@@ -13,6 +13,37 @@ $(document).ready(function () {
     const GAMEOVER_SOUND = new Audio("Resources/game-over.wav")
     const POINT_SOUND = new Audio("Resources/point.mp3")
     const GAME_START_SOUND = new Audio("Resources/game-start.wav")
+    const EASY_BUTTON = $("#easy")
+    const MEDIUM_BUTTON = $("#medium")
+    const HARD_BUTTON = $("#hard")
+
+    let waitTime = 1000;
+
+
+
+    EASY_BUTTON.click(() => {
+        waitTime = 2000
+        MEDIUM_BUTTON.removeClass("selectedDificulty")
+        HARD_BUTTON.removeClass("selectedDificulty")
+        EASY_BUTTON.addClass("selectedDificulty")
+        POINT_SOUND.play()
+    })
+    MEDIUM_BUTTON.click(() => {
+        waitTime = 1500
+        MEDIUM_BUTTON.addClass("selectedDificulty")
+        EASY_BUTTON.removeClass("selectedDificulty")
+        HARD_BUTTON.removeClass("selectedDificulty")
+        POINT_SOUND.play()
+
+    })
+    HARD_BUTTON.click(() => {
+        waitTime = 1000
+        HARD_BUTTON.addClass("selectedDificulty")
+        EASY_BUTTON.removeClass("selectedDificulty")
+        MEDIUM_BUTTON.removeClass("selectedDificulty")
+        POINT_SOUND.play()
+    })
+
 
 
     for (let i = 0; i < 20; i++) {
@@ -34,12 +65,11 @@ $(document).ready(function () {
         SCORE.css("color", "black")
         SCORE.text("0")
 
-        if(isPlaying)return
+        if (isPlaying) return
 
         let randomPositionX;
         let randomPositionY;
         let puntaje = 0;
-        let waitTime = 1000;
         let hovered = false;
         let lives = 3;
         isPlaying = true;
