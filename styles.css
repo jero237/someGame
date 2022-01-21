@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#main {
+    right: 0;
+    display: grid;
+    grid: repeat(20, 4vh) / repeat(20, 4vh);
+    gap: 5px;
+}
+
+.square {
+    color: red;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    
+}
+
