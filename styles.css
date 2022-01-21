@@ -1,18 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
+
 * {
     margin: 0;
+    font-family: 'Dongle', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    margin-top: 5vh;
+   background-color: rgba(0, 0, 0, .1);
 }
 
 #main {
-    right: 0;
+    display: grid;
+    grid: auto / 35vw 65vw;
+    justify-items: center;
+    align-items: center;
+    position: fixed;
+    margin-top: 5vh;
+}
+
+#playArea {
     display: grid;
     grid: repeat(20, 4vh) / repeat(20, 4vh);
     gap: 5px;
+}
+
+#scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .square {
@@ -20,6 +36,30 @@ body {
     background-color: red;
     width: 100%;
     height: 100%;
-    
+    border-radius: 2px;
 }
 
+h1 {
+    font-size: 30vh;
+}
+
+
+#lives{
+    display: inherit;
+    justify-content: center;
+}
+
+.fa-heart {
+    font-size: 5vh;
+}
+
+.fa-play-circle {
+    font-size: 10vh;
+    margin: 4vh 0;
+    transition: transform .2s;
+}
+
+.fa-play-circle:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
