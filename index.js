@@ -16,9 +16,19 @@ $(document).ready(function () {
     const EASY_BUTTON = $("#easy")
     const MEDIUM_BUTTON = $("#medium")
     const HARD_BUTTON = $("#hard")
+    const HIGHEST_SCORE = $("#highestScore")
+    let maxScore = new Array(3).fill(0)
 
     let waitTime = 1000;
+    let selectedDificulty = 1;
 
+    if (localStorage.getItem("maxScore") != null) {
+        maxScore = JSON.parse(localStorage.getItem("maxScore"))
+        console.log("Se importo el puntaje")
+    }
+
+
+    HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
 
 
     EASY_BUTTON.click(() => {
@@ -27,6 +37,9 @@ $(document).ready(function () {
         HARD_BUTTON.removeClass("selectedDificulty")
         EASY_BUTTON.addClass("selectedDificulty")
         POINT_SOUND.play()
+        selectedDificulty = 0;
+        HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
+
     })
     MEDIUM_BUTTON.click(() => {
         waitTime = 1500
@@ -34,7 +47,8 @@ $(document).ready(function () {
         EASY_BUTTON.removeClass("selectedDificulty")
         HARD_BUTTON.removeClass("selectedDificulty")
         POINT_SOUND.play()
-
+        selectedDificulty = 1;
+        HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
     })
     HARD_BUTTON.click(() => {
         waitTime = 1000
@@ -42,6 +56,8 @@ $(document).ready(function () {
         EASY_BUTTON.removeClass("selectedDificulty")
         MEDIUM_BUTTON.removeClass("selectedDificulty")
         POINT_SOUND.play()
+        selectedDificulty = 2;
+        HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
     })
 
 
@@ -62,7 +78,7 @@ $(document).ready(function () {
 
         let randomPositionX;
         let randomPositionY;
-        let puntaje = 0;
+        let score = 0;
         let hovered = false;
         let lives = 3;
         isPlaying = true;
@@ -75,9 +91,8 @@ $(document).ready(function () {
 
 
         const sumarPuntaje = () => {
-            puntaje++;
-            SCORE.text(puntaje)
-            console.log(waitTime)
+            score++;
+            SCORE.text(score)
             hovered = true;
             POINT_SOUND.play()
             $("#" + randomPositionX + "-" + randomPositionY).css("background-color", "green")
@@ -121,6 +136,11 @@ $(document).ready(function () {
                 isPlaying = false;
                 GAMEOVER_SOUND.play()
                 waitTime = iWaitTime;
+                if (score > maxScore[selectedDificulty]) {
+                    maxScore[selectedDificulty] = score
+                    HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
+                    localStorage.setItem("maxScore", JSON.stringify(maxScore))
+                }
                 return
             }
         }
