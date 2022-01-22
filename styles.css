@@ -14,14 +14,32 @@ body {
     grid: auto / 35vw 65vw;
     justify-items: center;
     align-items: center;
-    position: fixed;
-    margin-top: 5vh;
+    margin-top: 3vh;
 }
+
+#notComputer {
+    display: none;
+}
+
+@media only screen and (max-width: 1000px) and (hover:hover){
+    #main {
+        display: none;
+    }
+    #notComputer {
+        height: 100vh;
+        display: flex;
+        font-size: 40px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
 
 #playArea {
     display: grid;
-    grid: repeat(20, 4vh) / repeat(20, 4vh);
-    gap: 5px;
+    grid: repeat(20, 2vw) / repeat(20, 2vw);
+    gap: .7%;
 }
 
 #scoreboard {
