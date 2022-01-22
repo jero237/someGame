@@ -28,7 +28,7 @@ body {
         display: none;
     }
     #notComputer {
-        height: 100vh;
+        height: 100%;
         display: flex;
         font-size: 40px;
         align-items: center;
