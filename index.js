@@ -66,6 +66,7 @@ $(document).ready(function () {
         let hovered = false;
         let lives = 3;
         isPlaying = true;
+        let iWaitTime = waitTime;
 
         for (let i = 0; i < 3; i++) {
             LIVES[i].removeClass("far")
@@ -119,6 +120,7 @@ $(document).ready(function () {
                 SCORE.css("color", "red")
                 isPlaying = false;
                 GAMEOVER_SOUND.play()
+                waitTime = iWaitTime;
                 return
             }
         }
