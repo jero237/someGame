@@ -23,14 +23,15 @@ body {
     display: none;
 }
 
-@media only screen and (max-width: 1000px) and (hover:hover){
+@media only screen and (max-width: 800px) {
     #main {
         display: none;
     }
     #notComputer {
+        padding: 10%;
         height: 100%;
         display: flex;
-        font-size: 40px;
+        font-size: 8vw;
         align-items: center;
         justify-content: center;
         text-align: center;
