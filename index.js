@@ -1,36 +1,40 @@
+//Timer promise used in play() async function
 const timer = ms => new Promise(res => setTimeout(res, ms))
 let isPlaying = false;
 
 
-
 $(document).ready(function () {
+    //jQuery html items
     const MAIN = $("#playArea")
-    const SQUARE_DEFAULT_COLOR = "red";
-    const SCORE = $("#score")
-    const LIVES = [$("#live1"), $("#live2"), $("#live3")]
-    const PLAY_BUTTON = $(".fa-play-circle")
-    const LOST_LIVE_SOUND = new Audio("Resources/lose.mp3")
-    const GAMEOVER_SOUND = new Audio("Resources/game-over.wav")
-    const POINT_SOUND = new Audio("Resources/point.mp3")
-    const GAME_START_SOUND = new Audio("Resources/game-start.wav")
-    const EASY_BUTTON = $("#easy")
-    const MEDIUM_BUTTON = $("#medium")
-    const HARD_BUTTON = $("#hard")
-    const HIGHEST_SCORE = $("#highestScore")
-    let maxScore = new Array(3).fill(0)
+    const SCORE = $("#score");
+    const LIVES = [$("#live1"), $("#live2"), $("#live3")];
+    const PLAY_BUTTON = $(".fa-play-circle");
+    const EASY_BUTTON = $("#easy");
+    const MEDIUM_BUTTON = $("#medium");
+    const HARD_BUTTON = $("#hard");
+    const HIGHEST_SCORE = $("#highestScore");
 
-    let waitTime = 1000;
-    let selectedDificulty = 1;
+    //Sounds
+    const LOST_LIVE_SOUND = new Audio("Resources/lose.mp3");
+    const GAMEOVER_SOUND = new Audio("Resources/game-over.wav");
+    const POINT_SOUND = new Audio("Resources/point.mp3");
+    const GAME_START_SOUND = new Audio("Resources/game-start.wav");
 
+    //maxScore array sync with localStorage
+    let maxScore = new Array(3).fill(0);
     if (localStorage.getItem("maxScore") != null) {
         maxScore = JSON.parse(localStorage.getItem("maxScore"))
         console.log("Se importo el puntaje")
     }
 
+    //some variables
+    let waitTime = 1000;
+    let selectedDificulty = 1;
 
     HIGHEST_SCORE.text("Highest Score: " + maxScore[selectedDificulty])
 
 
+    //Difficulty buttons behavior
     EASY_BUTTON.click(() => {
         waitTime = 2000
         MEDIUM_BUTTON.removeClass("selectedDificulty")
@@ -61,7 +65,7 @@ $(document).ready(function () {
     })
 
 
-
+    //Grid rendering
     for (let i = 0; i < 20; i++) {
         for (let j = 0; j < 20; j++) {
             $("<div id='" + i + "-" + j + "' class='square' style='grid-area: " + i + "/" + j + "/" + (i + 1) + "/" + (j + 1) + "' />").appendTo(MAIN);
@@ -69,6 +73,7 @@ $(document).ready(function () {
     }
 
 
+    //Main play() function
     async function play() {
         GAME_START_SOUND.play()
         SCORE.css("color", "black")
@@ -124,7 +129,7 @@ $(document).ready(function () {
             if (!hovered) lostLive()
 
             $("#" + randomPositionX + "-" + randomPositionY).off("mouseenter", sumarPuntaje)
-            $("#" + randomPositionX + "-" + randomPositionY).css("background-color", SQUARE_DEFAULT_COLOR)
+            $("#" + randomPositionX + "-" + randomPositionY).css("background-color", "red")
             $("#" + randomPositionX + "-" + randomPositionY).css("transform", "scale(1)")
             $("#" + randomPositionX + "-" + randomPositionY).css("z-index", "0")
             hovered = false;
